@@ -1,0 +1,8 @@
+{
+  "name": "06-rowing-across-the-river",
+  "version": "1.0.0",
+  "description": "冥想小遊戲 06 划船渡河：2/4/6 位玩家以手機合力划船渡河",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}
