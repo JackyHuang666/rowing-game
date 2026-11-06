@@ -1,0 +1,96 @@
+:root{--bg:#0b242c;--bg2:#12363f;--ink:#e8f3f1;--mute:#8fb0b0;--acc:#7fd6c2;--warm:#f3c26b;--rose:#e98f8f;--card:rgba(255,255,255,.06);--line:rgba(255,255,255,.12)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;overscroll-behavior:none;touch-action:manipulation}
+body{background:radial-gradient(120% 80% at 50% 0%,#17444f 0%,var(--bg) 60%);min-height:100dvh}
+.hidden{display:none!important}
+.screen{display:none;min-height:100dvh}
+.screen.active{display:block}
+.wrap{max-width:440px;margin:0 auto;padding:max(28px,env(safe-area-inset-top)) 20px max(28px,env(safe-area-inset-bottom));text-align:center}
+.kicker{letter-spacing:.3em;font-size:12px;color:var(--acc);margin:18px 0 0}
+h1{font-size:44px;letter-spacing:.2em;margin:6px 0 10px;font-weight:600;text-indent:.2em}
+h2{font-size:15px;margin:0 0 12px;color:var(--mute);font-weight:500;letter-spacing:.1em}
+.lead{color:var(--mute);line-height:1.8;margin:0 0 22px}
+.lead.small{font-size:14px;margin:12px 0}
+.tip{color:var(--mute);font-size:12px;margin-top:22px}
+.field{display:block;text-align:left;margin-bottom:14px}
+.field span{display:block;font-size:12px;color:var(--mute);margin-bottom:6px}
+input{width:100%;padding:14px 16px;font-size:17px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:var(--ink);outline:none;text-align:center}
+input:focus{border-color:var(--acc)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin:14px 0}
+.card input{margin-bottom:12px;letter-spacing:.3em}
+button{font:inherit;color:var(--ink);cursor:pointer}
+button.primary{width:100%;padding:15px;border-radius:14px;border:0;background:linear-gradient(135deg,#5fc4ae,#7fd6c2);color:#06303a;font-weight:600;font-size:16px;letter-spacing:.15em}
+button.primary:disabled{opacity:.4}
+button.ghost{width:100%;padding:15px;border-radius:14px;border:1px solid var(--acc);background:transparent;color:var(--acc);font-size:15px}
+button.primary.ghost{background:transparent;color:var(--acc);font-weight:500}
+button.link{background:none;border:0;color:var(--mute);text-decoration:underline;padding:10px;font-size:13px}
+.seg{display:flex;gap:8px;margin-bottom:12px}
+.seg button{flex:1;padding:12px 0;border-radius:12px;border:1px solid var(--line);background:transparent;font-size:15px}
+.seg button.on{background:rgba(127,214,194,.18);border-color:var(--acc);color:var(--acc)}
+.row{display:flex;gap:10px;margin-top:6px}
+.row button{flex:1}
+.code{font-size:60px;letter-spacing:.2em;text-indent:.2em;font-weight:600;color:var(--warm);margin:4px 0}
+
+.boatview{margin:16px auto;width:200px;padding:64px 18px 26px;border-radius:100px 100px 22px 22px/170px 170px 22px 22px;background:linear-gradient(#8a6a46,#6e5238);border:2px solid #a98259;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.boatview .r{display:flex;justify-content:space-between;gap:34px;margin:12px 0}
+.seat{width:56px;text-align:center;font-size:11px;color:#f6ead7}
+.seat i{display:flex;align-items:center;justify-content:center;width:40px;height:40px;margin:0 auto 4px;border-radius:50%;font-style:normal;font-weight:600;font-size:16px;color:#0b242c;background:rgba(0,0,0,.25);border:2px dashed rgba(255,255,255,.3)}
+.seat.f i{border:2px solid rgba(255,255,255,.7)}
+.seat.me i{box-shadow:0 0 0 3px var(--warm)}
+.seat.off{opacity:.45}
+
+/* 遊戲 */
+#game{position:relative;height:100dvh;overflow:hidden;background:#0b242c;user-select:none;-webkit-user-select:none}
+#game.active{display:block}
+#stage{position:absolute;inset:0;touch-action:none}
+canvas{display:block}
+.hud{position:absolute;top:0;left:0;right:0;padding:max(10px,env(safe-area-inset-top)) 16px 0;pointer-events:none}
+.bar{height:5px;border-radius:3px;background:rgba(255,255,255,.14);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--warm))}
+.hudrow{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px;color:var(--mute);margin-top:6px;letter-spacing:.1em}
+.mini{pointer-events:auto;background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:50%;width:30px;height:30px;font-size:14px;padding:0}
+.mini.off{opacity:.4;text-decoration:line-through}
+.chips{position:absolute;left:0;right:0;bottom:0;display:flex;gap:6px;padding:8px 10px max(12px,env(safe-area-inset-bottom));justify-content:center;background:linear-gradient(transparent,rgba(5,20,25,.7))}
+.chips button{flex:1;max-width:100px;padding:9px 2px;font-size:12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);white-space:nowrap}
+.chips button:active{background:rgba(127,214,194,.25)}
+.intro{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:rgba(6,22,28,.55);pointer-events:none;transition:opacity 1.2s;padding:0 30px}
+.intro.gone{opacity:0}
+#introT{font-size:22px;line-height:1.8;letter-spacing:.12em;min-height:80px}
+#introC{font-size:64px;color:var(--warm);font-weight:300;margin-top:6px}
+.note{position:absolute;left:0;right:0;top:104px;text-align:center;color:var(--ink);font-size:14px;letter-spacing:.1em;opacity:0;transition:opacity .8s;pointer-events:none;padding:0 24px;text-shadow:0 1px 6px #000}
+.note.show{opacity:.9}
+.toast{position:fixed;left:50%;top:14%;transform:translate(-50%,-10px);background:rgba(8,28,35,.92);border:1px solid var(--line);color:var(--ink);padding:10px 18px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.3s;z-index:50;max-width:88vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.conn{position:fixed;top:0;left:0;right:0;text-align:center;font-size:12px;padding:4px;background:#7a3b3b;z-index:60}
+
+.stats{display:flex;gap:10px;margin:8px 0 6px}
+.stats div{flex:1;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 4px}
+.stats b{display:block;font-size:30px;font-weight:500;color:var(--warm)}
+.stats b::after{content:"%";font-size:13px;margin-left:1px;color:var(--mute)}
+.stats span{font-size:12px;color:var(--mute);letter-spacing:.2em}
+.quote{color:var(--acc);margin:18px 0 26px;line-height:1.9;font-size:15px}
+
+.btns{display:flex;gap:6px;pointer-events:auto}
+.badge{display:inline-block;padding:2px 10px;border-radius:999px;border:1px solid var(--line);font-size:11px;letter-spacing:.15em;color:var(--warm);background:rgba(0,0,0,.25)}
+.badge.big{font-size:13px;margin:0 0 14px;padding:4px 14px}
+h2.sub{margin:22px 0 10px}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
+.modes button{padding:14px 8px 12px;border-radius:16px;border:1px solid var(--line);background:var(--card);text-align:center;line-height:1.35}
+.modes button b{display:block;font-size:16px;font-weight:600;letter-spacing:.12em;margin-bottom:4px}
+.modes button span{display:block;font-size:11px;color:var(--mute)}
+.modes button.on{border-color:var(--acc);background:rgba(127,214,194,.16)}
+.modes button.on b{color:var(--acc)}
+.modes.lock button{pointer-events:none}
+.steer{position:absolute;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);top:58px;text-align:center;font-size:12px;letter-spacing:.05em;color:#ffe7b5;opacity:0;transition:opacity .5s;pointer-events:none;background:rgba(40,20,0,.45);border:1px solid rgba(243,194,107,.4);border-radius:12px;padding:6px 12px}
+.steer.show{opacity:1}
+.menu{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:rgba(4,16,20,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:20px}
+.menu .panel{width:100%;max-width:340px;text-align:center}
+.menu h2{font-size:26px;letter-spacing:.3em;text-indent:.3em;color:var(--ink);margin:0 0 6px}
+.menu button{display:block;width:100%;margin:10px 0}
+.menu button.ghost{padding:14px}
+.menu button.warn{border-color:var(--rose);color:var(--rose)}
+.menu button.armed{background:rgba(233,143,143,.2)}
+
+.fsbtn.fixed{position:fixed;top:max(10px,env(safe-area-inset-top));right:12px;z-index:45;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.08);font-size:17px;padding:0}
+body.ingame .fsbtn.fixed{display:none}
+.fsbtn.on{background:rgba(127,214,194,.25);border-color:var(--acc)}
